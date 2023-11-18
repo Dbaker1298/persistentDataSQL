@@ -101,10 +101,13 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pomo.yaml)")
 
+	rootCmd.Flags().StringP("db", "d", "pomo.db", "Database file")
+
 	rootCmd.PersistentFlags().DurationP("pomo", "p", 25*time.Minute, "Duration of a pomodoro")
 	rootCmd.PersistentFlags().DurationP("short", "s", 5*time.Minute, "Duration of a short break")
 	rootCmd.PersistentFlags().DurationP("long", "l", 15*time.Minute, "Duration of a long break")
 
+	viper.BindPFlag("db", rootCmd.Flags().Lookup("db"))
 	viper.BindPFlag("pomo", rootCmd.Flags().Lookup("pomo"))
 	viper.BindPFlag("short", rootCmd.Flags().Lookup("short"))
 	viper.BindPFlag("long", rootCmd.Flags().Lookup("long"))
